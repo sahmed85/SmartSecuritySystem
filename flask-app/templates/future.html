@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Air Quality Monitoring</title>
+      <!-- Global stylesheets -->
+      <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+      <link href="/static/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+      <link href="/static/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+      <link href="/static/assets/css/core.css" rel="stylesheet" type="text/css">
+      <link href="/static/assets/css/components.css" rel="stylesheet" type="text/css">
+      <link href="/static/assets/css/colors.css" rel="stylesheet" type="text/css">
+      <!-- /global stylesheets -->
+      <!-- Core JS files -->
+      <script type="text/javascript" src="/static/assets/js/core/libraries/jquery.min.js"></script>
+      <script type="text/javascript" src="/static/assets/js/core/libraries/bootstrap.min.js"></script>
+      <!-- /core JS files -->
+      <!-- Theme JS files -->
+      <script type="text/javascript" src="/static/assets/js/plugins/ui/drilldown.js"></script>
+      <script type="text/javascript" src="/static/assets/js/core/app.js"></script>
+      <script type="text/javascript" src="/static/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+      <script type="text/javascript" src="/static/assets/js/plugins/forms/selects/select2.min.js"></script>
+      <script type="text/javascript" src="/static/assets/js/pages/datatables_basic.js"></script>
+      <!-- /theme JS files -->
+      <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
+      <!-- Canvas JS graph library -->
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <!-- JS file for Canvas JS graph data -->
+      <script src="/static/raw-data-graphs.js"></script>
+   </head>
+   <body>
+      <input type="hidden" id="accountType" name="accountType" value="{{accountType}}">
+      <input type="hidden" id="authorusername" name="variable" value="{{request.user.first_name}} {{request.user.last_name}}">
+      <script type="text/javascript" src="/static/assets/js/navbar.js"></script>
+      <!-- Page container -->
+      <div class="page-container">
+         <!-- Page content -->
+         <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+               <div class="panel">
+                  <div class="content">
+                     <h4><i class="icon-stack position-left"></i> <span class="text-semibold">Raw Pollutants Data </span> </h4>
+                     <div id="tester" style="width:600px;height:250px;">
+                        <script>
+                            TESTER = document.getElementById('tester');
+                            Plotly.newPlot( TESTER, [{
+                            x: [1, 2, 3, 4, 5,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+                            y: [1, 2, 4, 8, 16,7,8,9,10,11,12,13,14,15,16,17,18,19,20] }], {
+                            margin: { t: 0 } } );
+                        </script>
+                    </div>
+                    </div>
+               </div>
+            </div>
+            
+            <!-- /main content -->
+         </div>
+         <!-- /page content -->
+      </div>
+      <!-- /page container -->
+      <script type="text/javascript" src="/static/assets/js/listingfilter.js"></script>
+   </body>
+</html>
+
+

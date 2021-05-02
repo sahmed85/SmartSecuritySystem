@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Security System</title>
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/colors.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+
+    <!-- Core JS files -->
+    <script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/core/libraries/bootstrap.min.js"></script>
+    <!-- /core JS files -->
+
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="/assets/js/plugins/ui/drilldown.js"></script>
+
+    <script type="text/javascript" src="/assets/js/core/app.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/forms/selects/select2.min.js"></script>
+
+    <script type="text/javascript" src="/assets/js/pages/datatables_basic.js"></script>
+
+    <!-- /theme JS files -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body>
+<script type="text/javascript" src="/assets/js/navbar.js"></script>
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Page content -->
+        <div class="page-content">
+
+            <!-- Main content -->
+            <div class="content-wrapper">
+<!-- Search field -->
+                    <div class="panel">
+                        <div class="panel-body">                            
+
+                    
+                    <form class="form-horizontal" class="main-search" action="#" method="post" role="form" >
+                                
+
+                                <div class="row search-option-buttons">
+                                
+
+                                    <div class="col-sm-12">
+                                        <ul class="list-inline list-inline-condensed no-margin-bottom">
+                                            <li class="dropdown">
+                                                <a href="#" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="icon-city position-left"></i> Location <span class="caret"></span>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="/future">Living Room</a></li>
+                                                    <li><a href="/future">Front Door</a></li>
+                                                </ul>
+                                            </li>
+
+                                            <li class="dropdown">
+                                                <a href="#" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="icon-history position-left"></i> Time Range <span class="caret"></span>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="/filter_data_time/1">Last 1 m</a></li>
+                                                    <li><a href="/filter_data_time/2">Last 15 m</a></li>
+                                                    <li><a href="/filter_data_time/3">Last 1 hr</a></li>
+                                                    <li><a href="/filter_data_time/4">Last 6 hrs</a></li>
+                                                    <li><a href="/filter_data_time/5">Last 12 hrs</a></li>
+                                                    <li><a href="/filter_data_time/6">Lasr 24 hrs</a></li>                                                  
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="/home">
+                                                    <i class="icon-lock position-left"></i> Unlock Events</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/motionDetecion">
+                                                    <i class="icon-video-camera position-left"></i> Motion Detection Events</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /search field -->
+
+<!-- Content area -->
+                <div class="content">
+                <h4><i class="icon-lock position-left"></i> <span class="text-semibold">Unlock Events </span> </h4>
+
+                <!-- Basic datatable -->
+                    <div class="panel panel-flat">
+                        <div class="panel-heading">                         
+                            <div class="heading-elements">
+                                <ul class="icons-list">
+                                    <li><a data-action="collapse"></a></li>
+                                    <li><a data-action="reload"></a></li>
+                                    <li><a data-action="close"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        
+
+
+                        <table class="table datatable-basic">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                    <th>Time</th>
+                                    <th>Event</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in data %}
+                                <tr>
+                                    <td>{{item.day}}, {{item.month}} {{item.year}}</td>
+                                    <td>Home</td>                                 
+                                    <td>{{item.hour}}:{{item.min}}:{{item.sec}}</td>
+                                    <td>Door Unlocked</td>     
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /basic datatable -->
+                                
+                            </div>
+                            
+
+                            
+
+                            
+                            <!-- /list -->
+                        
+                    <!-- /detached content -->
+                    </div>
+
+                
+
+
+                
+
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+
+    </div>
+    <!-- /page container -->
+<script type="text/javascript" src="/static/assets/js/listingfilter.js"></script>
+</body>
+</html>

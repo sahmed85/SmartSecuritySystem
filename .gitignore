@@ -1,0 +1,8 @@
+##PDF files
+*.pdf
+##Private keys
+*.pem
+*.ppk
+##environment setup scripts
+env.py
+
