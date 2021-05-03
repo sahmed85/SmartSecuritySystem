@@ -23,7 +23,7 @@ To run our project, OpenCV and AWS SDK must be installed on the Rpi. The steps b
 #### AWS SDK Setup:
 
 ## Code
-### Mbed Code
+### Mbed 
 ### Rpi Serial Communication with Mbed
 ### Rpi Motion Detection
 ### Rpi AWS S3 Put Object
