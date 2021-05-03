@@ -26,6 +26,12 @@ To run our project, OpenCV and AWS SDK must be installed on the Rpi. The steps b
 #### OpenCV:
 The version of OpenCV installed on the Rpi for this project is 4.2.0. To install OpenCV follow this guide by [Q-engineering](https://github.com/sahmed85/SmartSecuritySystem/blob/master/ECE%204180%20Final%20Project%20Architecture.png?raw=true) [1].
 Once completing the guide, make sure to set the swap size back to its orginal value. The guide also includes methods to check if the installaton was correct using python. Once completed, we can use the Makefile inside the /MotionDetection directory to build the executable (details in the Code section).
+#### AWS C++ SDK Setup:
+The lastest version of the AWS C++ SDK needs to be installed and built to be used in our project. To install and build the AWS SDK follow this guide provided by [AWS](https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html) [3]. **Note** that we do not need to build all parts of the SDK, instead we only need S3 and DynamoDB. **Tweak the cmake command in the AWS guide to**:
+```
+$ cmake -DCMAKE_BUILD_TYPE=Debug -D BUILD_ONLY="s3;dynamodb"
+```
+Follow the rest of the guide to successfully install and build the SDK.
 ### AWS Resources Setup:
 Three AWS resources is needed: 1 S3 Bucket, 2 DynamoDB tables and 1 Identity and Access Management(IAM) User.   
 To setup the S3 bucket navigate to the S3 console in aws.amazon.com. Create a new S3 bucket for hosting the static website and enable static website hosting for the bucket. Uncheck Block all public access under Bucket setting for Block Public Access section. The bucket name must be unique. Once created, go to the settings of the bucket and add a bucket policy shown below enable public access to the videos uploaded:. 
@@ -65,12 +71,6 @@ AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 Default region name [None]: us-east-1
 Default output format [None]: json
 ```
-#### AWS C++ SDK Setup:
-The lastest version of the AWS C++ SDK needs to be installed and built to be used in our project. To install and build the AWS SDK follow this guide provided by [AWS](https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html) [3]. **Note** that we do not need to build all parts of the SDK, instead we only need S3 and DynamoDB. **Tweak the cmake command in the AWS guide to**:
-```
-$ cmake -DCMAKE_BUILD_TYPE=Debug -D BUILD_ONLY="s3;dynamodb"
-```
-Follow the rest of the guide to successfully install and build the SDK.
 ## Code
 ### Mbed 
 ### Rpi Serial Communication with Mbed
