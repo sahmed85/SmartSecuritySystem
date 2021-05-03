@@ -23,7 +23,6 @@ It also assumes that the Python Package Installer (pip) is installed. It also as
 ### Mbed
 ### Raspberry Pi
 To run our project, OpenCV and AWS SDK must be installed on the Rpi. The steps below show the methods used to install and build these libraries:
-
 #### OpenCV:
 The version of OpenCV installed on the Rpi for this project is 4.2.0. To install OpenCV follow this guide by [Q-engineering](https://github.com/sahmed85/SmartSecuritySystem/blob/master/ECE%204180%20Final%20Project%20Architecture.png?raw=true) [1].
 Once completing the guide, make sure to set the swap size back to its orginal value. The guide also includes methods to check if the installaton was correct using python. Once completed, we can use the Makefile inside the /MotionDetection directory to build the executable (details in the Code section).
@@ -58,7 +57,7 @@ Verify that is installed and working:
 ```
 $ aws --version
 ```
-Next use the AWS configure command in the terminal to insert the Access Key, Secret Access Key, region name [2]:
+Next use the AWS configure command in the terminal to insert the Access Key, Secret Access Key from the IAM Role that we created earlier [2]:
 ```
 $ aws configure
 AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
@@ -75,11 +74,13 @@ Follow the rest of the guide to successfully install and build the SDK.
 ## Code
 ### Mbed 
 ### Rpi Serial Communication with Mbed
+
 ### Rpi Motion Detection
 ### Rpi AWS S3 Put Object
 ### Rpi AWS DynamoDB Put Item
+### Flask Web App
 ## Demo
-## Future Work
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/1eew0ciX4P0/0.jpg)](http://www.youtube.com/watch?v=1eew0ciX4P0 "Project Demo")
 ## References
 [1] OpenCV 4.2.0 Installation Guide: https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html  
 [2] AWS CLI Configureation Basics: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html   
