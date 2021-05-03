@@ -5,6 +5,9 @@
   * Momen Yacoub - Computer Engineering Georgia Tech
 
 ## Project Description and Architecture:
+[INSERT PROJECT DESCRIPTION]
+The overall project architecture can be seen here:
+
 
 ## Parts List
 
