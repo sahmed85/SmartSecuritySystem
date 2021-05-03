@@ -1,8 +1,8 @@
 # Smart Security System
 
 ## Team Members:
-  * Shadman Ahmed - Computer Engineering Georgia Tech
-  * Momen Yacoub - Computer Engineering Georgia Tech
+  * Shadman Ahmed - Computer Engineering - Georgia Tech
+  * Momen Yacoub - Computer Engineering -  Georgia Tech
 
 ## Project Description and Architecture:
 [INSERT PROJECT DESCRIPTION]
