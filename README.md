@@ -7,7 +7,7 @@
 ## Project Description and Architecture:
 [INSERT PROJECT DESCRIPTION]
 The overall project architecture can be seen here:
-![ECE 4180 Final Project Architecture](https://user-images.githubusercontent.com/59095227/116839644-242dd580-aba1-11eb-978e-9eef24af0ac4.png)
+![ECE 4180 Final Project Architecture](https://github.com/sahmed85/SmartSecuritySystem/blob/master/ECE%204180%20Final%20Project%20Architecture.png?raw=true)
 
 ## Parts List
 
