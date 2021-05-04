@@ -126,8 +126,9 @@ $ make
 ```
 ### Rpi AWS S3 Put Object
 **This code is located in the folder named *AWSS3Put***
-As mentioned in the sections above, this C++ executable is called in the Motion Capture Program to upload the video file to AWS S3. The code utilized the AWS SDK and its repective APIs to send the video files to S3. Details regarding how the AWS S3 Put code works can be found on [AWS](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-s3.html)[6].
-To build and compile this the AWS S3 Put program, utilize the CMakeLists.txt make file located in the folder. Make a directory to where cmake will build the application:
+As mentioned in the sections above, this C++ executable is called in the Motion Capture Program to upload the video file to AWS S3. The code utilized the AWS SDK and its respective APIs to send the video files to S3. Details regarding how the AWS S3 Put code works can be found on [AWS](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-s3.html)[6].
+
+Remember to change the name of the S3 bucket to match the name of the resource you created earlier. To build and compile this the AWS S3 Put program, utilize the CMakeLists.txt make file located in the folder. Make a directory to where cmake will build the application:
 ```
 $ mkdir my_project_build
 ```
@@ -145,7 +146,45 @@ The executable in this program expects one command line argument (as demonstrate
 ./AWSPutS3.o [path-of-file-to-upload]
 ```
 ### Rpi AWS DynamoDB Put Item
+**This code is located in the folder named *AWSDynamoDBPut***
+As mentioned in the sections above, this C++ executable is called in both the Serial Commmunication with mbed Program and Motion Capture Program to put items into the Database of when an event occurs. The code utilized the AWS SDK and its respective APIs to send the data to the database. Details regarding how the AWS DynamoDB Put code works can be found on [AWS](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-dynamodb.html) [7].
+
+To build and compile this the AWS DynamoDB Put program, utilize the CMakeLists.txt make file located in the folder. Make a directory to where cmake will build the application:
+```
+$ mkdir my_project_build
+```
+Change to that directory and run ```cmake``` using the path to the project's source directory:
+```
+$ cd my_project_build
+$ cmake ../
+```
+After cmake generates your build directory, you can use ```make``` to build and compile the application.
+```
+$ make
+```
+The executable in this program expects one command line argument (as demonstrated in the Motion Detection Program system call):
+```
+./AWSDynamoDBPut.o [name-of-table] [event-name] timestamp=[epoch-timestamp]
+```
 ### Flask Web App
+Flask is a web framework, it’s a Python module that lets you develop web applications easily. Flask depends on the Jinja template engine and the Werkzeug WSGI toolkit [8]. The web application for this project is hosted using Flask and can be run the Pi itself, a virtual machine or locally on your computer.
+The web application also using the AWS library called boto3 to read data from the DynamoDB database. The data from the database is then rendered into the template using Flasks web templating system. The static HTML files and its corresponding assests (like CSS stlyes etc.) are located inside the *static* folder. 
+
+Before running the application, a ```env.py``` file must be made. This file will store the variables of your Access Key ID, Secret Key ID and web application hostname. Keep this file seperate and not hardcoded into your ```app.py``` is a good and secure practice. Create a env.py inside the same directory of your ```app.py``` and add this:
+```
+# IAM User access configuration
+AWS_ACCESS_KEY="INSERT-KEY-HERE"
+AWS_SECRET_ACCESS_KEY="INSERT-SECRET-KEY-HERE"
+AWS_REGION="INSERT-REGION-HERE"
+
+SERVER_HOSTNAME = 'localhost:5000'
+```
+Also ensure that you use pip install any missing packages that you may not have to run ```app.py```.
+
+To run the application, simple open a terminal in that directory and run:
+```
+$ python app.py //or python3 app.py
+```
 ## Demo
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/1eew0ciX4P0/0.jpg)](http://www.youtube.com/watch?v=1eew0ciX4P0 "Project Demo")
 ## References
@@ -155,3 +194,5 @@ The executable in this program expects one command line argument (as demonstrate
 [4] VideoCapture: https://github.com/Arri/VideoCapture
 [5] Simple Home-Surveillance with OpenCV, C++ and Rpi: https://www.manmade2.com/simple-home-surveillance-with-opencv-c-and-raspberry-pi/
 [6] C++ Code Samples for Amazon S3: https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-s3.html
+[7] C++ Code Samples for Amazon DynamDB: https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-dynamodb.html
+[8] Flask: https://flask.palletsprojects.com/en/1.1.x/
