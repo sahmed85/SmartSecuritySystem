@@ -27,7 +27,7 @@ To run our project, OpenCV and AWS SDK must be installed on the Rpi. The steps b
 The version of OpenCV installed on the Rpi for this project is 4.2.0. To install OpenCV follow this guide by [Q-engineering](https://github.com/sahmed85/SmartSecuritySystem/blob/master/ECE%204180%20Final%20Project%20Architecture.png?raw=true) [1].
 Once completing the guide, make sure to set the swap size back to its orginal value. The guide also includes methods to check if the installaton was correct using python. Once completed, we can use the Makefile inside the /MotionDetection directory to build the executable (details in the Code section).
 #### AWS C++ SDK Setup:
-The lastest version of the AWS C++ SDK needs to be installed and built to be used in our project. To install and build the AWS SDK follow this guide provided by [AWS](https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html) [3]. **Note** that we do not need to build all parts of the SDK, instead we only need S3 and DynamoDB. **Tweak the cmake command in the AWS guide to**:
+The lastest version of the AWS C++ SDK needs to be installed and built to be used in our project. To install and build the AWS SDK follow this guide provided by [AWS](https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html) [2]. **Note** that we do not need to build all parts of the SDK, instead we only need S3 and DynamoDB. **Tweak the cmake command in the AWS guide to**:
 ```
 $ cmake -DCMAKE_BUILD_TYPE=Debug -D BUILD_ONLY="s3;dynamodb"
 ```
@@ -75,8 +75,23 @@ Default output format [None]: json
 ## Code
 ### Mbed 
 ### Rpi Serial Communication with Mbed
+**This code is located in the folder named *serialWithMbed***
+Since the mbed is connected to the Rpi over serial, there needs to be code on the Rpi to handle the serial characters sent to it. Using the standard Linux file system I/O API calls, it is possible to communicate with the mbed. The code will open the USB virtual com port checking for errors, then it will sit in a loop waiting to receive commands from the mbed. If a unlock event is sent over the serial communication, the code will make a system call to the DynamoDB Put executable, shown here:
+```
+sys_call = "/home/pi/dynamoDBPut/build/app SmartSecurityUnlockEvents unlock timestamp=" + to_string(time) + " &";
+char_sys_call = &sys_call[0];
+system(char_sys_call);
+```
+A system call is used to invoke an operating system command from a C/C++ program. In our case, it calling the C++ DynamoDB Put executable and passing in the command line argument for the table name and the timestamp it occured at. The '&' informs the shell to put the command in the background. This means it continues to the serial communication code while doing the DynamoDB Put in parallel. This is a useful way to break our code into modular parts and make sure that our serial communication is not slowed down by waiting for the network.   
 
+To run the code, simply use g++ in the terminal:
+```
+$ g++ serialWithMbed.cpp -o serialMbed.o
+``` 
 ### Rpi Motion Detection
+**This code is located in the folder named *MotionDetection***
+The frames captured by the camera attached to the Rpi is processed for motion detection using OpenCV. The flowchart shown below describes everything the MotionDetection program does [4]:
+
 ### Rpi AWS S3 Put Object
 ### Rpi AWS DynamoDB Put Item
 ### Flask Web App
@@ -84,5 +99,7 @@ Default output format [None]: json
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/1eew0ciX4P0/0.jpg)](http://www.youtube.com/watch?v=1eew0ciX4P0 "Project Demo")
 ## References
 [1] OpenCV 4.2.0 Installation Guide: https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html  
-[2] AWS CLI Configureation Basics: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html   
-[3] AWS C++ SDK Setup for Linux: https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html
+[2] AWS C++ SDK Setup for Linux: https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html
+[3] AWS CLI Configureation Basics: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html   
+[4] Simple Home-Surveillance with OpenCV, C++ and Rpi: https://github.com/Arri/VideoCapture
+
