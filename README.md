@@ -189,7 +189,7 @@ $ python app.py //or python3 app.py
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/1eew0ciX4P0/0.jpg)](http://www.youtube.com/watch?v=1eew0ciX4P0 "Project Demo")
 ## References
 [1] OpenCV 4.2.0 Installation Guide: https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html  
-[2] AWS C++ SDK Setup for Linux: https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html
+[2] AWS C++ SDK Setup for Linux: https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html   
 [3] AWS CLI Configureation Basics: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html   
 [4] VideoCapture: https://github.com/Arri/VideoCapture    
 [5] Simple Home-Surveillance with OpenCV, C++ and Rpi: https://www.manmade2.com/simple-home-surveillance-with-opencv-c-and-raspberry-pi/    
