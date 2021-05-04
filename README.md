@@ -18,7 +18,7 @@ The overall project architecture can be seen here:
 ## Parts List
 
 ## Schematic and Connections
-
+![Project Pin Connections and Schematic](https://github.com/sahmed85/SmartSecuritySystem/blob/master/Schematic%20and%20Connections.png?raw=true)
 ## Setup
 This setup assumes that the mbed is on the latest firmware. It also assumes that Raspian OS is installed on your Rpi with the latest package updates using:
 ```
