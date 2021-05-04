@@ -84,15 +84,66 @@ system(char_sys_call);
 ```
 A system call is used to invoke an operating system command from a C/C++ program. In our case, it calling the C++ DynamoDB Put executable and passing in the command line argument for the table name and the timestamp it occured at. The '&' informs the shell to put the command in the background. This means it continues to the serial communication code while doing the DynamoDB Put in parallel. This is a useful way to break our code into modular parts and make sure that our serial communication is not slowed down by waiting for the network.   
 
-To run the code, simply use g++ in the terminal:
+Before running this section of the code, make sure to build and compile the DynamoDB Put code (more on that below). Remember to change the directory in the system calls to match your setup. To build, compile and run the code, simply use g++ in the terminal:
 ```
 $ g++ serialWithMbed.cpp -o serialMbed.o
 ``` 
 ### Rpi Motion Detection
 **This code is located in the folder named *MotionDetection***
-The frames captured by the camera attached to the Rpi is processed for motion detection using OpenCV. The flowchart shown below describes everything the MotionDetection program does [4]:
+The frames captured by the camera attached to the Rpi is processed for motion detection using OpenCV. The flowchart shown below describes everything the MotionDetection program does [4]:   
+![Motion Detection Program Flow](https://github.com/sahmed85/SmartSecuritySystem/blob/master/Motion%20Detection%20Program%20Flow.png?raw=true)
+The files and folders inside MotionDetection are broken down as such [5]:
+```
+main.cpp
+./include
+     camLib.hpp
+     camLib.cpp    
+CMakeLists.txt
+./detections
+     time_stamped_video_files.avi
+```
+* main.cpp: The main routine that creates instances of the Camera class library. It activate the camera and then in an endless loop to find out if anything moved in the field-of-view (FoV) of the camera. This all is achieved by calling member functions in ./include/camLib.cpp, which itself calls e.g. openCV functions. Once a video is saved, the code makes a system call (similar to the Serial Communication with Mbed section mentioned above) to call a executable to put the saved video file in S3 and make an entry of the motion event in DynamoDB:
+```
+//Build system call strings based on time
+sys_call_table = "/home/pi/dynamoDBPut/build/app SmartSecurityVideoEvents MotionDetect timestamp=" + to_string(time) + " &";
+sys_call_s3 = "/home/pi/s3putVideo/build/app /home/pi/VideoCapture/MotionVideoCapture/detections/" + to_string(time) + ".mp4 &";
+...
+//make two threads to write that video to the cloud and store record in DB
+char_sys_call_table = &sys_call_table[0];
+system(char_sys_call_table);
+char_sys_call_s3 = &sys_call_s3[0];
+system(char_sys_call_s3);
+```
+* include/camLib.hpp: The definition of the applied classes.
+* include/camLib.cpp: The header file (here with the name camLib.hpp) defines the implemented classed and is basically a listing of all element functions and variables used in this class.
+It also contains a listing of all required include files which are used in all other parts of the program.
+* CMakeLists.txt: cmake library that enables simple compilation with openCV bindings.
 
+To build and compile this part of the project, utilize cmake to build the project using the make file provide. This step assumes that OpenCV was correctly installed and that the DynamoDB Put code has been built and compiled. Remember to change the directory in the system calls to match your setup. In the in the directory of where the CMakeLists.txt is located, run this to build and compile the code:
+```
+$ cmake CMakeLists.txt
+$ make
+```
 ### Rpi AWS S3 Put Object
+**This code is located in the folder named *AWSS3Put***
+As mentioned in the sections above, this C++ executable is called in the Motion Capture Program to upload the video file to AWS S3. The code utilized the AWS SDK and its repective APIs to send the video files to S3. Details regarding how the AWS S3 Put code works can be found on [AWS](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-s3.html)[6].
+To build and compile this the AWS S3 Put program, utilize the CMakeLists.txt make file located in the folder. Make a directory to where cmake will build the application:
+```
+$ mkdir my_project_build
+```
+Change to that directory and run ```cmake``` using the path to the project's source directory:
+```
+$ cd my_project_build
+$ cmake ../
+```
+After cmake generates your build directory, you can use ```make``` to build and compile the application.
+```
+$ make
+```
+The executable in this program expects one command line argument (as demonstrated in the Motion Detection Program system call):
+```
+./AWSPutS3.o [path-of-file-to-upload]
+```
 ### Rpi AWS DynamoDB Put Item
 ### Flask Web App
 ## Demo
@@ -101,5 +152,6 @@ The frames captured by the camera attached to the Rpi is processed for motion de
 [1] OpenCV 4.2.0 Installation Guide: https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html  
 [2] AWS C++ SDK Setup for Linux: https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html
 [3] AWS CLI Configureation Basics: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html   
-[4] Simple Home-Surveillance with OpenCV, C++ and Rpi: https://github.com/Arri/VideoCapture
-
+[4] VideoCapture: https://github.com/Arri/VideoCapture
+[5] Simple Home-Surveillance with OpenCV, C++ and Rpi: https://www.manmade2.com/simple-home-surveillance-with-opencv-c-and-raspberry-pi/
+[6] C++ Code Samples for Amazon S3: https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-s3.html
