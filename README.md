@@ -9,6 +9,7 @@ This project creates a smart security system using the Mbed NXP LPC1768 and Rasp
 * a solenoid lock that unlocks using GPIO
 * a I2C Keypad to enter the code to unlock the solenoid
 * a camera that detects motion and save the video
+* a RGB LED status indicator that lights green upon correct code entry and blinks red upon incorrect code entry
 * Amazon Web Services (AWS) cloud resources to save unlock and motion detection events and store uploaded motion detection videos
 * Web Application GUI dashboard to view unlock and motion detection events and view motion detection video online.
 
@@ -19,6 +20,7 @@ The overall project architecture can be seen here:
 * (1) Mbed NXP LPC1768
 * (1) Raspberry Pi 4 (with USB-C Powersupply)
 * (1) Solenoid Lock
+* (1) MOSFET Driver
 * (1) RGB LED
 * (1) Freescale MPR121 Touch Keypad
 * (1) USB Camera or Rpi Camera Module
@@ -88,6 +90,9 @@ Default output format [None]: json
 ```
 ## Code
 ### Mbed 
+The Mbed was used to control when the door is unlocked, the indicator LED, and it would alert the PI when an unlock event would occur. The Mbed would keep the indicator LED red while the door was locked.  If an incorrect passcode were entered the Mbed would flash the LED red, and if the correct passcode was entered the led would turn green. 
+The Mbed would receive an interrupt when the touch keypad is pressed. The Mbed would then store the key that was pressed in a buffer. If the keys in the buffer matched the passcode, the Mbed would unlock the door and alert the PI that an unlock even occurred. The buffer would be flushed every 3 seconds (this was achieved using a timer) or whenever it is full. It is only before flushing the buffer that the passcode is compared with the keys pressed.   
+When the correct passcode has been entered, the MBED would unlock the door by driving the control pin on the MOSFET high and it would keep the door unlocked for 2 seconds (achieved using a wait). A MOSFET is needed to control the external 12 V power supply because the voltage provided by the Mbed isn’t sufficient for the solenoid lock.
 ### Rpi Serial Communication with Mbed
 **This code is located in the folder named *serialWithMbed***
 Since the mbed is connected to the Rpi over serial, there needs to be code on the Rpi to handle the serial characters sent to it. Using the standard Linux file system I/O API calls, it is possible to communicate with the mbed. The code will open the USB virtual com port checking for errors, then it will sit in a loop waiting to receive commands from the mbed. If a unlock event is sent over the serial communication, the code will make a system call to the DynamoDB Put executable, shown here:
