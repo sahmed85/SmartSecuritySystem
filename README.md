@@ -5,7 +5,13 @@
   * Momen Yacoub - Computer Engineering -  Georgia Tech
 
 ## Project Description and Architecture:
-[INSERT PROJECT DESCRIPTION]  
+This project creates a smart security system using the Mbed NXP LPC1768 and Raspberry Pi 4. The smart security system includes:
+* a solenoid lock that unlocks using GPIO
+* a I2C Keypad to enter the code to unlock the solenoid
+* a camera that detects motion and save the video
+* Amazon Web Services (AWS) cloud resources to save unlock and motion detection events and store uploaded motion detection videos
+* Web Application GUI dashboard to view unlock and motion detection events and view motion detection video online.
+
 The overall project architecture can be seen here:
 ![ECE 4180 Final Project Architecture](https://github.com/sahmed85/SmartSecuritySystem/blob/master/ECE%204180%20Final%20Project%20Architecture.png?raw=true)
 
