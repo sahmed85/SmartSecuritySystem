@@ -91,7 +91,7 @@ $ g++ serialWithMbed.cpp -o serialMbed.o
 ### Rpi Motion Detection
 **This code is located in the folder named *MotionDetection***
 The frames captured by the camera attached to the Rpi is processed for motion detection using OpenCV. The flowchart shown below describes everything the MotionDetection program does [4]:   
-![Motion Detection Program Flow](https://github.com/sahmed85/SmartSecuritySystem/blob/master/Motion%20Detection%20Program%20Flow.png?raw=true)
+![Motion Detection Program Flow](https://github.com/sahmed85/SmartSecuritySystem/blob/master/Motion%20Detection%20Program%20Flow.png?raw=true)   
 The files and folders inside MotionDetection are broken down as such [5]:
 ```
 main.cpp
