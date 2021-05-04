@@ -16,7 +16,15 @@ The overall project architecture can be seen here:
 ![ECE 4180 Final Project Architecture](https://github.com/sahmed85/SmartSecuritySystem/blob/master/ECE%204180%20Final%20Project%20Architecture.png?raw=true)
 
 ## Parts List
-
+* (1) Mbed NXP LPC1768
+* (1) Raspberry Pi 4 (with USB-C Powersupply)
+* (1) Solenoid Lock
+* (1) RGB LED
+* (1) Freescale MPR121 Touch Keypad
+* (1) USB Camera or Rpi Camera Module
+* (1) 12V Power Supply for Solenoid Lock
+* (2) 10k Ohm Resistor
+* (1) 330 Ohm Resistor
 ## Schematic and Connections
 ![Project Pin Connections and Schematic](https://github.com/sahmed85/SmartSecuritySystem/blob/master/Schematic%20and%20Connections.png?raw=true)
 ## Setup
