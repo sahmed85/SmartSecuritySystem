@@ -191,8 +191,8 @@ $ python app.py //or python3 app.py
 [1] OpenCV 4.2.0 Installation Guide: https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html  
 [2] AWS C++ SDK Setup for Linux: https://docs.aws.amazon.com/es_es/sdk-for-cpp/v1/developer-guide/setup-linux.html
 [3] AWS CLI Configureation Basics: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html   
-[4] VideoCapture: https://github.com/Arri/VideoCapture
-[5] Simple Home-Surveillance with OpenCV, C++ and Rpi: https://www.manmade2.com/simple-home-surveillance-with-opencv-c-and-raspberry-pi/
-[6] C++ Code Samples for Amazon S3: https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-s3.html
-[7] C++ Code Samples for Amazon DynamDB: https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-dynamodb.html
-[8] Flask: https://flask.palletsprojects.com/en/1.1.x/
+[4] VideoCapture: https://github.com/Arri/VideoCapture    
+[5] Simple Home-Surveillance with OpenCV, C++ and Rpi: https://www.manmade2.com/simple-home-surveillance-with-opencv-c-and-raspberry-pi/    
+[6] C++ Code Samples for Amazon S3: https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-s3.html    
+[7] C++ Code Samples for Amazon DynamDB: https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-cpp-example_code-dynamodb.html    
+[8] Flask: https://flask.palletsprojects.com/en/1.1.x/    
