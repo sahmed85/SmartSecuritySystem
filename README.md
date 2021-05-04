@@ -37,6 +37,7 @@ $ sudo apt-get upgrade
 ```
 It also assumes that the Python Package Installer (pip) is installed. It also assumes that you have a AWS account setup and ready to create cloud resources on. 
 ### Mbed
+The Mbed should be connected to the computer to flash code to it. The code, which is found in the Mbed folder can be compiled in the Mbed cloud compiler. To interface with the touch keypad, this code this [library](https://os.mbed.com/users/4180_1/code/MPR121_Demo/) was utilized.
 ### Raspberry Pi
 To run our project, OpenCV and AWS SDK must be installed on the Rpi. The steps below show the methods used to install and build these libraries:
 #### OpenCV:
@@ -90,6 +91,7 @@ Default output format [None]: json
 ```
 ## Code
 ### Mbed 
+**This code is located in the folder named *Mbed*** 
 The Mbed was used to control when the door is unlocked, the indicator LED, and it would alert the PI when an unlock event would occur. The Mbed would keep the indicator LED red while the door was locked.  If an incorrect passcode were entered the Mbed would flash the LED red, and if the correct passcode was entered the led would turn green. 
 The Mbed would receive an interrupt when the touch keypad is pressed. The Mbed would then store the key that was pressed in a buffer. If the keys in the buffer matched the passcode, the Mbed would unlock the door and alert the PI that an unlock even occurred. The buffer would be flushed every 3 seconds (this was achieved using a timer) or whenever it is full. It is only before flushing the buffer that the passcode is compared with the keys pressed.   
 
